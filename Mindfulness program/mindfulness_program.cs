@@ -5,6 +5,7 @@ using System.Threading;
 
 public abstract class Activity
 {
+    // Encapsulation: using properties with public getters and setters
     public string Name { get; set; }
     public string Description { get; set; }
     public int Duration { get; set; }
@@ -29,7 +30,7 @@ public abstract class Activity
         LogActivity();
     }
 
-    public abstract void PerformActivity();
+    public abstract void PerformActivity(); // Abstract method to be overridden in derived classes
 
     private void LogActivity()
     {
@@ -38,6 +39,7 @@ public abstract class Activity
     }
 }
 
+// Derived class BreathingActivity inheriting from Activity
 public class BreathingActivity : Activity
 {
     public BreathingActivity()
@@ -72,6 +74,7 @@ public class BreathingActivity : Activity
     }
 }
 
+// Derived class ReflectionActivity inheriting from Activity
 public class ReflectionActivity : Activity
 {
     private List<string> prompts = new List<string>
@@ -162,6 +165,7 @@ public class ReflectionActivity : Activity
     }
 }
 
+// Derived class ListingActivity inheriting from Activity
 public class ListingActivity : Activity
 {
     private List<string> prompts = new List<string>
@@ -222,7 +226,7 @@ public class ListingActivity : Activity
     }
 }
 
-// New GratitudeActivity class
+// New GratitudeActivity class inheriting from Activity
 public class GratitudeActivity : Activity
 {
     public GratitudeActivity()
@@ -294,4 +298,16 @@ Exceeding Requirements:
 2. Implemented a logging system that records each activity performed and its duration into a log file ("activity_log.txt").
 3. Ensured that no random prompts/questions are repeated within a single session for ReflectionActivity and ListingActivity.
 4. Detailed comments have been added to describe these enhancements and their purpose.
+*/
+
+/*
+Principles and Requirements:
+1. Encapsulation: Properties and methods are encapsulated within the Activity class.
+2. Inheritance Hierarchy: The BreathingActivity, ReflectionActivity, ListingActivity, and GratitudeActivity classes inherit from the Activity base class.
+3. Inheriting Attributes: Derived classes inherit properties such as Name, Description, and Duration from the Activity class.
+4. Inheriting Behaviors: Derived classes implement the abstract method PerformActivity, defining their specific behaviors.
+5. Functionality: Each activity (Breathing, Listing, Reflecting, Gratitude) has specific implementations and demonstrates unique behaviors.
+6. Pausing/Animation: Used Thread.Sleep for pauses and spinner animation in ReflectionActivity.
+7. Style: Whitespace and naming conventions follow C# standards for readability and maintenance.
+8. Creativity: Added GratitudeActivity and logging functionality to exceed core requirements.
 */
