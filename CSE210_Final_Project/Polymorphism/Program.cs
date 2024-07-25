@@ -1,81 +1,86 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+
+abstract class Activity
+{
+    public double Distance { get; set; }
+    public double Duration { get; set; } // in hours
+
+    public Activity(double distance, double duration)
+    {
+        Distance = distance;
+        Duration = duration;
+    }
+
+    public abstract double GetSpeed(); // Speed in mph
+    public abstract double GetPace(); // Pace in min/mile
+
+    public virtual string GetSummary()
+    {
+        return $"Distance: {Distance} miles\nDuration: {Duration} hours\nSpeed: {GetSpeed()} mph\nPace: {GetPace()} min/mile";
+    }
+}
+
+class Running : Activity
+{
+    public Running(double distance, double duration) : base(distance, duration) { }
+
+    public override double GetSpeed()
+    {
+        return Distance / Duration;
+    }
+
+    public override double GetPace()
+    {
+        return (Duration * 60) / Distance;
+    }
+}
+
+class Cycling : Activity
+{
+    public Cycling(double distance, double duration) : base(distance, duration) { }
+
+    public override double GetSpeed()
+    {
+        return Distance / Duration;
+    }
+
+    public override double GetPace()
+    {
+        return (Duration * 60) / Distance;
+    }
+}
+
+class Swimming : Activity
+{
+    public Swimming(double distance, double duration) : base(distance, duration) { }
+
+    public override double GetSpeed()
+    {
+        return Distance / Duration;
+    }
+
+    public override double GetPace()
+    {
+        return (Duration * 60) / Distance;
+    }
+}
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        // Create shapes
-        var square = new Square("Red", 4);
-        var rectangle = new Rectangle("Blue", 4, 6);
-        var circle = new Circle("Green", 3);
-
-        // List of shapes
-        var shapes = new List<Shape> { square, rectangle, circle };
-
-        // Display shape information
-        foreach (var shape in shapes)
+        List<Activity> activities = new List<Activity>
         {
-            Console.WriteLine($"Shape: {shape.GetType().Name}, Color: {shape.Color}, Area: {shape.GetArea()}");
+            new Running(5, 0.5),
+            new Cycling(20, 1),
+            new Swimming(1, 0.4)
+        };
+
+        foreach (var activity in activities)
+        {
+            Console.WriteLine(activity.GetSummary());
+            Console.WriteLine();
         }
-    }
-}
-
-abstract class Shape
-{
-    public string Color { get; private set; }
-
-    protected Shape(string color)
-    {
-        Color = color;
-    }
-
-    public abstract double GetArea();
-}
-
-class Square : Shape
-{
-    public double Side { get; private set; }
-
-    public Square(string color, double side) : base(color)
-    {
-        Side = side;
-    }
-
-    public override double GetArea()
-    {
-        return Side * Side;
-    }
-}
-
-class Rectangle : Shape
-{
-    public double Width { get; private set; }
-    public double Height { get; private set; }
-
-    public Rectangle(string color, double width, double height) : base(color)
-    {
-        Width = width;
-        Height = height;
-    }
-
-    public override double GetArea()
-    {
-        return Width * Height;
-    }
-}
-
-class Circle : Shape
-{
-    public double Radius { get; private set; }
-
-    public Circle(string color, double radius) : base(color)
-    {
-        Radius = radius;
-    }
-
-    public override double GetArea()
-    {
-        return Math.PI * Radius * Radius;
     }
 }
